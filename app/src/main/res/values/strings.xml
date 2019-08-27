@@ -1,4 +1,11 @@
 <resources>
     <string name="app_name">SimpleDatabase</string>
     <string name="no_data_found">No Data Found</string>
+    <string name="delete">DELETE</string>
+    <string name="update">UPDATE</string>
+    <string name="enter_email">Enter Email</string>
+    <string name="enter_age">Enter Age</string>
+    <string name="enter_mobile">Enter Mobile</string>
+    <string name="enter_name">Enter Name</string>
+    <string name="menu_add">menu_add</string>
 </resources>

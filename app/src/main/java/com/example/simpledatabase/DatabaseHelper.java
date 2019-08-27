@@ -7,30 +7,30 @@ import android.database.sqlite.SQLiteOpenHelper;
 public class DatabaseHelper extends SQLiteOpenHelper {
 
     // Table Name
-    public static final String TABLE_NAME = "REGISTER";
+    static final String TABLE_NAME = "REGISTER";
 
     // Table columns
-    public static final String _ID = "_id";
-    public static final String NAME = "name";
-    public static final String MOBILE = "mobileNumber";
-    public static final String AGE = "age";
-    public static final String EMAIL = "email";
+    static final String _ID = "_id";
+    static final String NAME = "name";
+    static final String MOBILE = "mobileNumber";
+    static final String AGE = "age";
+    static final String EMAIL = "email";
 
     // Database Information
-    static final String DB_NAME = "REGISTRATION.DB";
+    private static final String DB_NAME = "REGISTRATION.DB";
 
     // database version
-    static final int DB_VERSION = 1;
+    private static final int DB_VERSION = 1;
 
     // Creating table query
     private static final String CREATE_TABLE = "create table " + TABLE_NAME
-            + "(" + "_ID" + " INTEGER PRIMARY KEY AUTOINCREMENT, "
+            + "(" + _ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
             + NAME + " TEXT NOT NULL, "
             + MOBILE + " TEXT NOT NULL, "
             + AGE + " TEXT NOT NULL, "
             + EMAIL + " TEXT);";
 
-    public DatabaseHelper(Context context) {
+    DatabaseHelper(Context context) {
         super(context, DB_NAME, null, DB_VERSION);
     }
 

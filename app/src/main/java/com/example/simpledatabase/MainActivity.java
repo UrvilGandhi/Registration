@@ -16,11 +16,8 @@ import androidx.appcompat.app.AppCompatActivity;
 public class MainActivity extends AppCompatActivity {
 
     final String[] from = new String[]{DatabaseHelper._ID,
-            DatabaseHelper.NAME,DatabaseHelper.MOBILE,DatabaseHelper.AGE, DatabaseHelper.EMAIL};
-    final int[] to = new int[]{R.id.txtid, R.id.txtname, R.id.txtmobile,R.id.txtage,R.id.txtemail};
-    private DBManager dbManager;
-    private ListView listView;
-    private SimpleCursorAdapter adapter;
+            DatabaseHelper.NAME, DatabaseHelper.MOBILE, DatabaseHelper.AGE, DatabaseHelper.EMAIL};
+    final int[] to = new int[]{R.id.txtid, R.id.txtname, R.id.txtmobile, R.id.txtage, R.id.txtemail};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,14 +25,14 @@ public class MainActivity extends AppCompatActivity {
 
         setContentView(R.layout.activity_list);
 
-        dbManager = new DBManager(this);
+        DBManager dbManager = new DBManager(this);
         dbManager.open();
         Cursor cursor = dbManager.fetch();
 
-        listView = findViewById(R.id.list_view);
+        ListView listView = findViewById(R.id.list_view);
         listView.setEmptyView(findViewById(R.id.empty));
 
-        adapter = new SimpleCursorAdapter(this, R.layout.activity, cursor, from, to, 0);
+        SimpleCursorAdapter adapter = new SimpleCursorAdapter(this, R.layout.activity, cursor, from, to, 0);
         adapter.notifyDataSetChanged();
 
         listView.setAdapter(adapter);
@@ -56,10 +53,12 @@ public class MainActivity extends AppCompatActivity {
                 String age = ageText.getText().toString();
                 String email = emailText.getText().toString();
 
-                Intent modify_intent = new Intent(getApplicationContext(), ModifyCountryActivity.class);
-                modify_intent.putExtra("title", title);
-                modify_intent.putExtra("desc", desc);
+                Intent modify_intent = new Intent(getApplicationContext(), ModifyEntry.class);
+                modify_intent.putExtra("name", name);
+                modify_intent.putExtra("mobile", mobile);
                 modify_intent.putExtra("id", id);
+                modify_intent.putExtra("age", age);
+                modify_intent.putExtra("email", email);
 
                 startActivity(modify_intent);
             }
@@ -68,7 +67,7 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.main, menu);
+        getMenuInflater().inflate(R.menu.menu, menu);
         return true;
     }
 
@@ -78,7 +77,7 @@ public class MainActivity extends AppCompatActivity {
         int id = item.getItemId();
         if (id == R.id.add_record) {
 
-            Intent add_mem = new Intent(this, AddCountryActivity.class);
+            Intent add_mem = new Intent(this, AddEntry.class);
             startActivity(add_mem);
 
         }

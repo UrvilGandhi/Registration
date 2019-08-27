@@ -10,9 +10,7 @@ import android.widget.EditText;
 
 public class ModifyEntry extends Activity implements OnClickListener {
 
-    private EditText titleText;
-    private Button updateBtn, deleteBtn;
-    private EditText descText;
+    private EditText modName, modMobile, modAge, modEmail;
 
     private long _id;
 
@@ -24,26 +22,32 @@ public class ModifyEntry extends Activity implements OnClickListener {
 
         setTitle("Modify Record");
 
-        setContentView(R.layout.activity_modify_record);
+        setContentView(R.layout.activity_modify);
 
         dbManager = new DBManager(this);
         dbManager.open();
 
-        titleText = (EditText) findViewById(R.id.subject_edittext);
-        descText = (EditText) findViewById(R.id.description_edittext);
+        modName = findViewById(R.id.modname);
+        modMobile = findViewById(R.id.modmobile);
+        modAge = findViewById(R.id.modage);
+        modEmail = findViewById(R.id.modemail);
 
-        updateBtn = (Button) findViewById(R.id.btn_update);
-        deleteBtn = (Button) findViewById(R.id.btn_delete);
+        Button updateBtn = findViewById(R.id.btn_update);
+        Button deleteBtn = findViewById(R.id.btn_delete);
 
         Intent intent = getIntent();
         String id = intent.getStringExtra("id");
-        String name = intent.getStringExtra("title");
-        String desc = intent.getStringExtra("desc");
+        String name = intent.getStringExtra("name");
+        String mobile = intent.getStringExtra("mobile");
+        String age = intent.getStringExtra("age");
+        String email = intent.getStringExtra("email");
 
         _id = Long.parseLong(id);
 
-        titleText.setText(name);
-        descText.setText(desc);
+        modName.setText(name);
+        modMobile.setText(mobile);
+        modAge.setText(age);
+        modEmail.setText(email);
 
         updateBtn.setOnClickListener(this);
         deleteBtn.setOnClickListener(this);
@@ -53,10 +57,12 @@ public class ModifyEntry extends Activity implements OnClickListener {
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.btn_update:
-                String title = titleText.getText().toString();
-                String desc = descText.getText().toString();
+                String name = modName.getText().toString();
+                String mobile = modMobile.getText().toString();
+                String age = modAge.getText().toString();
+                String email = modEmail.getText().toString();
 
-                dbManager.update(_id, title, desc);
+                dbManager.update(_id, name, mobile, age, email);
                 this.returnHome();
                 break;
 
@@ -68,7 +74,7 @@ public class ModifyEntry extends Activity implements OnClickListener {
     }
 
     public void returnHome() {
-        Intent home_intent = new Intent(getApplicationContext(), CountryListActivity.class)
+        Intent home_intent = new Intent(getApplicationContext(), MainActivity.class)
                 .setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(home_intent);
     }
